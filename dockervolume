@@ -1,0 +1,32 @@
+docker volume ls
+docker volume create mongodb
+docker run –rm -d  --name mongodb -v mongodb:/data/db -p 27017: 27017 mongo:latest
+docker ps 
+get into container docker exec -it mongodb mongosh > showdbs 
+#Add some data init
+
+db.helo.insertMany([
+{ "_id" : 1, "name" : "Matt", "status": "active", "level": 12, "score":202},
+        	{ "_id" : 2, "name" : "Frank", "status": "inactive", "level": 2, "score":9},
+        	{ "_id" : 3, "name" : "Karen", "status": "active", "level": 7, "score":87},
+        	{ "_id" : 4, "name" : "Katie", "status": "active", "level": 3, "score":27, "status": "married", "emp": "yes", "kids": 3},
+        	{ "_id" : 5, "name" : "Matt1", "status": "active", "level": 12, "score":202},
+        	{ "_id" : 6, "name" : "Frank2", "status": "inactive", "level": 2, "score":9},
+        	{ "_id" : 7, "name" : "Karen3", "status": "active", "level": 7, "score":87},
+        	{ "_id" : 8, "name" : "Katie4", "status": "active", "level": 3, "score":27, "status": "married", "emp": "yes", "kids": 3}
+        	])
+
+
+db.helo.find({name: "Karen"})
+
+######################################################################
+
+docker run --rm -d --name app1 -v /var/run/docker.sock:/var/run/docker.sock --network  none mohansekar20/troubleshootingtools:v1
+
+docker create volume create portainerdata
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
+        --restart=always \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v portainer_data:/data \
+        portainer/portainer-ce:2.11.1
